@@ -7,6 +7,8 @@ import imutils
 import argparse
 import os
 import math
+from tensorflow.keras.models import load_model
+
 
 
 def constrastLimit(image):
@@ -102,13 +104,35 @@ def correct(cont,img):
 
     return scan
 
+def grayscale(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    return img
+
+
+def getCalssName(classNo):
+    if classNo == 0:
+        return 'Stop'
+    elif classNo == 1:
+        return 'Turn right ahead'
+    elif classNo == 2:
+        return 'Turn left ahead'
+
+def predict(img):
+    img = np.asarray(img)
+    img = cv2.resize(img, (32, 32))
+    img = grayscale(img)
+    img = img / 255
+    img = img.reshape(1, 32, 32, 1)
+    model = load_model('model.h5')
+    classIndex = model.predict_classes(img)
+    return classIndex
 
 if __name__=='__main__':
     path = 'test.png'
     orig_image = cv2.imread(path)
     image = preprocess_image(orig_image)
     roi = correct(largest_cont(image),orig_image)
-    cv2.imshow('ImageWindow', roi)
+    cv2.imshow('roi',roi)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     
