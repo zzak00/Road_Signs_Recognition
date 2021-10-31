@@ -2,11 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from math import sqrt
-from skimage.feature import blob_dog, blob_log, blob_doh
-import imutils
-import argparse
-import os
-import math
+from numpy.core.fromnumeric import argmax
 from tensorflow.keras.models import load_model
 
 
@@ -116,6 +112,55 @@ def getCalssName(classNo):
         return 'Turn right ahead'
     elif classNo == 2:
         return 'Turn left ahead'
+    elif classNo == 3:
+        return 'Danger'
+
+def detect_circles(image,gray,dp=1.2,minDist=100):
+
+    '''image: 8-bit, single channel image. If working with a color image, convert to grayscale first.
+    method: Defines the method to detect circles in images. Currently, the only implemented method is cv2.HOUGH_GRADIENT, which corresponds to the Yuen et al. paper.
+    dp: This parameter is the inverse ratio of the accumulator resolution to the image resolution (see Yuen et al. for more details). Essentially, the larger the dp gets, the smaller the accumulator array gets.
+    minDist: Minimum distance between the center (x, y) coordinates of detected circles. If the minDist is too small, multiple circles in the same neighborhood as the original may be (falsely) detected. If the minDist is too large, then some circles may not be detected at all.
+    param1: Gradient value used to handle edge detection in the Yuen et al. method.
+    param2: Accumulator threshold value for the cv2.HOUGH_GRADIENT method. The smaller the threshold is, the more circles will be detected (including false circles). The larger the threshold is, the more circles will potentially be returned.
+    minRadius: Minimum size of the radius (in pixels).
+    maxRadius: Maximum size of the radius (in pixels).'''
+
+    circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, dp, minDist)
+    circles = np.uint16(np.around(circles))
+    height = image.shape[0]
+    width = image.shape[1]
+    ROIs = []
+    for i in circles[0, :]:
+
+        # Prepare a black canvas:
+        canvas = np.zeros((height, width))
+
+        # Draw the outer circle:
+        color = (255, 255, 255)
+        thickness = -1
+        centerX = i[0]
+        centerY = i[1]
+        radius = i[2]
+        cv2.circle(canvas, (centerX, centerY), radius, color, thickness)
+
+        # Create a copy of the input and mask input:
+        imageCopy = image.copy()
+        imageCopy[canvas == 0] = (0, 0, 0)
+
+        # Crop the roi:
+        x = centerX - radius
+        y = centerY - radius
+        h = 2 * radius
+        w = 2 * radius
+
+        croppedImg = imageCopy[y:y + h, x:x + w]
+        croppedImg[croppedImg==0]=255
+        # Store the ROI:
+        ROIs.append(croppedImg) 
+    return ROIs
+
+
 
 def predict(img):
     img = np.asarray(img)
@@ -124,17 +169,20 @@ def predict(img):
     img = img / 255
     img = img.reshape(1, 32, 32, 1)
     model = load_model('model.h5')
-    classIndex = model.predict_classes(img)
+    pred = model.predict(img)
+    classIndex = argmax(pred)
     return classIndex
 
 if __name__=='__main__':
     path = 'test.png'
     orig_image = cv2.imread(path)
     image = preprocess_image(orig_image)
-    roi = correct(largest_cont(image),orig_image)
-    cv2.imshow('roi',roi)
+    #roi = correct(largest_cont(image),orig_image)
+    roi = detect_circles(orig_image,image)
+    print(getCalssName(predict(roi[1])))
+    '''cv2.imshow('roi',img)
     cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    cv2.destroyAllWindows()'''
     
 
 
