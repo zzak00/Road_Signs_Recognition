@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="606mm"
+   height="606mm"
+   viewBox="0 0 606 606"
+   version="1.1"
+   id="svg857"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="1111.svg">
+  <defs
+     id="defs851" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="2093.6139"
+     inkscape:cy="854.98348"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata854">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,309)">
+    <circle
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-miterlimit:10"
+       id="path859"
+       cx="303"
+       cy="-5.9999743"
+       r="302" />
+    <circle
+       style="fill:#ffffff;stroke:none;stroke-width:0;stroke-miterlimit:10"
+       id="circle1422"
+       cx="303"
+       cy="-5.9999743"
+       r="300" />
+    <circle
+       style="fill:#173283;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:10"
+       id="circle1424"
+       cx="303"
+       cy="-5.9999743"
+       r="288" />
+    <path
+       id="rect10"
+       style="fill:#ffffff;stroke:none;stroke-width:0;stroke-miterlimit:10"
+       d="m 443.00039,-205.99968 99.99967,99.99967 L 442.99997,-5.9999148 H 342.99986 L 408.00003,-71.000075 H 242.99976 c -5.54,0 -9.9999,4.4599 -9.9999,9.99989 V 206.00006 H 163 l 1e-5,-296.999945 C 163,-118.6999 185.30004,-140.99995 213.00006,-140.99995 h 194.99998 l -65.00016,-65.00015 z"
+       sodipodi:nodetypes="cccccccccssccc" />
+  </g>
+</svg>

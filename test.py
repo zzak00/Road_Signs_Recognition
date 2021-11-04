@@ -45,6 +45,9 @@ def getCalssName(classNo):
         return 'Turn right ahead'
     elif classNo == 2:
         return 'Turn left ahead'
+    elif classNo == 3:
+	    return 'Attention'
+  
 
 
 
